@@ -1,5 +1,5 @@
 
-## Lab 3 - Setup CI/CD using AWS CodePipeline
+## Lab 2 - Setup CI/CD using AWS CodePipeline
 
 ### Stage 1: Create a Pipeline (Console)
 
@@ -33,7 +33,7 @@ After you create a pipeline, you cannot change its name. For information about o
 10. Now that you've created your pipeline, you can view it in the console. Pipeline will start automatically in few minutes. Otherwise, test it by manually clicking the **Release change** button.
 
 Image below shows successfully executed pipeline.
-![pipeline-released](./img/Lab2-Stage1-Complete.PNG)
+![pipeline-released](./img/Lab2-Stage1-Complete.png)
 
 ***
 
@@ -53,7 +53,7 @@ We will edit the pipeline to add the stage for production deployment and introdu
 8. Choose **Save**.
 9. Finally, save changes by clicking **Save** button on top.
 
-![pipeline-edit](./img/Lab2-Stage2-Editing2.PNG)
+![pipeline-edit](./img/Lab2-Stage2-Editing2.png)
 ***
 
 ### Stage 3: Add Manual approval action
@@ -78,7 +78,7 @@ aws sns subscribe --topic-arn <<YOUR-TOPIC-ARN>> \
 
 3. An Email would be sent for **confirmation** on the subscription. **Acknowledge** the subscription to receive mails from topic.
 
-![pipeline-edit](./img/Lab2-Stage3-Confirm-MustDoOrErrorOccurs.PNG)
+![pipeline-edit](./img/Lab2-Stage3-Confirm-MustDoOrErrorOccurs.png)
 
 4. On the pipeline details page, choose **Edit**. This opens the editing page for the pipeline. Choose **+ Add stage** at the point in the pipeline **between Deploy** and **Production** stage, and type a name **Approval** for the stage.
 5. Choose the **+ Add action group**.
@@ -105,7 +105,7 @@ If you receive a notification that includes a direct link to an approval action,
 6. Return to the pipeline details view, and then choose the **Review** button.
 7. In the **Approve or reject** the revision window, type comments related to your review, such as why you are approving or rejecting the action, and then choose the **Approve** or **Reject** button.
 
-![pipeline-edit](./img/Lab2-Stage3-ApprovalPipeline.PNG)
+![pipeline-edit](./img/Lab2-Stage3-ApprovalPipeline.png)
 
 Once you approve, the pipeline continues and completes successfully.
 

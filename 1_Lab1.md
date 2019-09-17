@@ -80,7 +80,7 @@ Provide your Git HTTPs credential when prompted. You would be seeing the followi
 
 ### Stage 3: Commit changes to Remote Repo
 
-1. Download the Sample Web App Archive by running the following command from IDE terminal.
+1. Download the Sample Android Note App Archive by running the following command from IDE terminal.
 
 ```console
 user:~/environment $ wget https://github.com/aws-samples/aws-mobile-android-notes-tutorial/archive/master.zip
@@ -318,4 +318,4 @@ user:~/environment/AndroidAppRepo (master) $ aws codebuild batch-get-builds --id
 
 This **concludes Lab 1**. In this lab, we successfully created repository with version control using AWS CodeCommit and built our code on the cloud using AWS CodeBuild service. You can now move to the next Lab,
 
-[Lab 2 - Automate deployment for testing](2_Lab2.md)
+[Lab 2 - Setup CI/CD using AWS CodePipeline](2_Lab2.md)
