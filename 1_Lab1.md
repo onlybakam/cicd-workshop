@@ -130,6 +130,7 @@ For more information, see [Browse the Contents of a Repository](http://docs.aws.
 
 ***
 
+## Lab 1 - Part 2 - Building
 
 ### Stage 4: Prepare Build Service
 
@@ -137,8 +138,8 @@ For more information, see [Browse the Contents of a Repository](http://docs.aws.
   Ensure you are launching it in the same region as your AWS CodeCommit repo.
 
 ```console
-user:~/environment/AndroidAppRepo (master) $ aws cloudformation create-stack --stack-name DevopsWorkshop-roles \
---template-body https://s3.amazonaws.com/devops-workshop-0526-2051/01-aws-devops-workshop-roles.template \
+aws cloudformation create-stack --stack-name DevopsWorkshop-roles \
+--template-body https://brice-cicd-workshop-2019.s3.amazonaws.com/roles.template \
 --capabilities CAPABILITY_IAM
 ```
 
@@ -151,18 +152,18 @@ user:~/environment/AndroidAppRepo (master) $ aws cloudformation create-stack --s
 4. Run the following commands to get the value of Build Role ARN and S3 bucket from cloudformation template launched earlier.
 
 ```console
-user:~/environment/AndroidAppRepo (master) $ sudo yum -y install jq
-user:~/environment/AndroidAppRepo (master) $ echo $(aws cloudformation describe-stacks --stack-name DevopsWorkshop-roles | jq -r '.Stacks[0].Outputs[]|select(.OutputKey=="BuildRoleArn")|.OutputValue')
-user:~/environment/AndroidAppRepo (master) $ echo $(aws cloudformation describe-stacks --stack-name DevopsWorkshop-roles | jq -r '.Stacks[0].Outputs[]|select(.OutputKey=="S3BucketName")|.OutputValue')
+sudo yum -y install jq
+echo $(aws cloudformation describe-stacks --stack-name DevopsWorkshop-roles | jq -r '.Stacks[0].Outputs[]|select(.OutputKey=="BuildRoleArn")|.OutputValue')
+echo $(aws cloudformation describe-stacks --stack-name DevopsWorkshop-roles | jq -r '.Stacks[0].Outputs[]|select(.OutputKey=="S3BucketName")|.OutputValue')
 ```
 
 5. Let us **create CodeBuild** project from **CLI**. To create the build project using AWS CLI, we need JSON-formatted input.
-    **_Create_** a json file named **_'create-project.json'_** under 'MyDevEnvironment'. ![](./img/create-json.png) Copy the content below to create-project.json. (Replace the placeholders marked with **_<<>>_** with  values for BuildRole ARN, S3 Output Bucket and region from the previous step.) 
+    **_Create_** a json file named **_'create-project.json'_** under 'MyDevEnvironment'. Copy the content below to create-project.json. (Replace the placeholders marked with **_<<>>_** with  values for BuildRole ARN, S3 Output Bucket and region from the previous step.) 
     
 
 ```json
 {
-  "name": "devops-webapp-project",
+  "name": "android-app-project",
   "source": {
     "type": "CODECOMMIT",
     "location": "https://git-codecommit.<<REPLACE-YOUR-REGION-ID>>.amazonaws.com/v1/repos/AndroidAppRepo"
@@ -170,12 +171,13 @@ user:~/environment/AndroidAppRepo (master) $ echo $(aws cloudformation describe-
   "artifacts": {
     "type": "S3",
     "location": "<<REPLACE-YOUR-CODEBUILD-OUTPUT-BUCKET>>",
-    "packaging": "ZIP",
-    "name": "WebAppOutputArtifact.zip"
+    "packaging": "NONE",
+    "overrideArtifactName": false,
+    "name": "AndroidBuildArtifact"
   },
   "environment": {
     "type": "LINUX_CONTAINER",
-    "image": "aws/codebuild/java:openjdk-8",
+    "image": "aws/codebuild/standard:2.0",
     "computeType": "BUILD_GENERAL1_SMALL"
   },
   "serviceRole": "<<REPLACE-BuildRoleArn-Value-FROM-CLOUDFORMATION-OUTPUT>>"
@@ -185,10 +187,10 @@ user:~/environment/AndroidAppRepo (master) $ echo $(aws cloudformation describe-
   To know more about the codebuild project json [review the spec](http://docs.aws.amazon.com/codebuild/latest/userguide/create-project.html#create-project-cli).
 
 
-6. Switch to the directory that contains the file you just saved, and run the **_create-project_** command:
+1. Switch to the directory that contains the file you just saved, and run the **_create-project_** command:
 
 ```console
-user:~/environment/AndroidAppRepo (master) $ aws codebuild create-project --cli-input-json file://../create-project.json
+aws codebuild create-project --cli-input-json file://create-project.json
 ```
 
 7. Sample output JSON for your reference
@@ -258,26 +260,20 @@ user:~/environment/AndroidAppRepo (master) $ aws codebuild create-project --cli-
     Create a file namely, **_buildspec.yml_** under **AndroidAppRepo** folder. Copy the content below to the file and **save** it. To know more about [how CodeBuild works](http://docs.aws.amazon.com/codebuild/latest/userguide/concepts.html#concepts-how-it-works).
 
 ```yaml
-version: 0.1
+version: 0.2
 
 phases:
   install:
-    commands:
-      - echo Nothing to do in the install phase...
-  pre_build:
-    commands:
-      - echo Nothing to do in the pre_build phase...
+    runtime-versions:
+      java: openjdk8
+      android: 28
   build:
     commands:
-      - echo Build started on `date`
-      - mvn install
-  post_build:
-    commands:
-      - echo Build completed on `date`
+      - ./gradlew assembleDebug
 artifacts:
   files:
-    - target/javawebdemo.war
-  discard-paths: no
+    - app/build/outputs/apk/debug/app-debug.apk
+  discard-paths: yes
 ```
 
 As a sample shown below:
@@ -297,7 +293,7 @@ user:~/environment/AndroidAppRepo/ $ git push -u origin master
 3. Run the **_start-build_** command:
 
 ```console
-user:~/environment/AndroidAppRepo (master) $ aws codebuild start-build --project-name devops-webapp-project
+aws codebuild start-build --project-name android-app-project
 ```
 
 **_Note:_** You can start build with more advance configuration setting via JSON. If you are interested to learn more about it, please visit [here](http://docs.aws.amazon.com/codebuild/latest/userguide/run-build.html#run-build-cli).
@@ -314,7 +310,7 @@ user:~/environment/AndroidAppRepo (master) $ aws codebuild batch-get-builds --id
 6. You will also be able to view detailed information about your build in CloudWatch Logs. You can complete this step by visiting the [AWS CodeBuild console](https://console.aws.amazon.com/codebuild/home).
 ![buildsuccess](./img/Lab1-CodeBuild-Success.png)
 
-7. In this step, you will verify the **_WebAppOutputArtifact.zip_** file that AWS CodeBuild built and then uploaded to the output bucket. You can complete this step by **visiting** the **AWS CodeBuild console** or the **Amazon S3 console**.
+7. In this step, you will verify the **_app-debug.apk_** file that AWS CodeBuild built and then uploaded to the output bucket. You can complete this step by **visiting** the **AWS CodeBuild console** or the **Amazon S3 console**.
 
 **_Note:_** Troubleshooting CodeBuild - Use the [information](http://docs.aws.amazon.com/codebuild/latest/userguide/troubleshooting.html) to help you identify, diagnose, and address issues.
 

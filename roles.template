@@ -145,6 +145,18 @@
               "Resource": "*"
             },
             {
+              "Effect": "Allow",
+              "Action": [
+                "devicefarm:ListProjects",
+                "devicefarm:ListDevicePools",
+                "devicefarm:GetRun",
+                "devicefarm:GetUpload",
+                "devicefarm:CreateUpload",
+                "devicefarm:ScheduleRun"
+              ],
+              "Resource": "*"
+            },
+            {
               "Action": ["logs:GetLogEvents"],
               "Effect": "Allow",
               "Resource": "arn:aws:logs:*:*:log-group:/aws/codebuild/*:log-stream:*"
