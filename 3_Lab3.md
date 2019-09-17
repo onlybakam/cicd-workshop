@@ -39,6 +39,8 @@ In this step, you will add a new stage to your pipeline, and then add an action 
 
 3. Click **Done**. Finally, save changes to pipeline by clicking **Save** button on top
 
+Learn more about [working with the Built-in Fuzz Test for Device Farm](https://docs.aws.amazon.com/devicefarm/latest/developerguide/test-types-built-in-fuzz.html)
+
 ![DeviceFarmAction](./img/Lab3-DeviceFarmAction.png)
 
 ***
