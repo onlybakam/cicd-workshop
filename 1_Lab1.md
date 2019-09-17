@@ -18,7 +18,7 @@ Take a moment now and setup your Cloud9 development environment.
 8. Once ready, your IDE will open to a welcome screen. Below that, you should see a terminal prompt similar to: ![setup](./img/setup-cloud9-terminal.png) You can run AWS CLI commands in here just like you would on your local computer. Verify that your user is logged in by running the following command.
 
 ```console
-user:~/environment $ aws sts get-caller-identity
+aws sts get-caller-identity
 ```
 
 You'll see output indicating your account and user information:
@@ -70,7 +70,7 @@ In this step, you will connect to the source repository created in the previous 
 3. Run git clone to pull down a copy of the repository into the local repo:
 
 ```console
-user:~/environment $ git clone https://git-codecommit.<YOUR-REGION>.amazonaws.com/v1/repos/AndroidAppRepo
+git clone https://git-codecommit.<YOUR-REGION>.amazonaws.com/v1/repos/AndroidAppRepo
 
 ```
 
@@ -83,27 +83,27 @@ Provide your Git HTTPs credential when prompted. You would be seeing the followi
 1. Download the Sample Android Note App Archive by running the following command from IDE terminal.
 
 ```console
-user:~/environment $ wget https://github.com/aws-samples/aws-mobile-android-notes-tutorial/archive/master.zip
+wget https://github.com/aws-samples/aws-mobile-android-notes-tutorial/archive/master.zip
 ```
 
 2. Unzip and copy all the **_contents_** of the unzipped folder to your local repo folder.
 
 ```console
-user:~/environment $ unzip master.zip
-user:~/environment $ mv -v aws-mobile-android-notes-tutorial-master/* AndroidAppRepo/
+unzip master.zip
+mv -v aws-mobile-android-notes-tutorial-master/* AndroidAppRepo/
 ```
 
 1. Change the directory to your local repo folder. Run **_git add_** to stage the change:
 
 ```console
-user:~/environment $ cd AndroidAppRepo
-user:~/environment/AndroidAppRepo/ $ git add *
+cd AndroidAppRepo
+git add *
 ```
 
 4. Run **_git commit_** to commit the change:
 
 ```console
-user:~/environment/AndroidAppRepo/ $ git commit -m "Initial Commit"
+git commit -m "Initial Commit"
 ```
 
 **_💡 Tip_** To see details about the commit you just made, run **_git log_**.
@@ -111,13 +111,13 @@ user:~/environment/AndroidAppRepo/ $ git commit -m "Initial Commit"
 5. Run **_git config credential_** to store the credential.
 
 ```console
-user:~/environment/AndroidAppRepo/ $ git config credential.helper store
+git config credential.helper store
 ```
 
 6. Run **_git push_** to push your commit through the default remote name Git uses for your AWS CodeCommit repository (origin), from the default branch in your local repo (master):
 
 ```console
-user:~/environment/AndroidAppRepo/ $ git push -u origin master
+git push -u origin master
 ```
 
 Provide your Git HTTPs credential when prompted. Credential helper will store it, hence you won't be asked again for subsequent push.
@@ -284,9 +284,9 @@ As a sample shown below:
 
 2. Commit & push the build specification file to repository
 ```console
-user:~/environment/AndroidAppRepo/ $ git add buildspec.yml
-user:~/environment/AndroidAppRepo/ $ git commit -m "adding buildspec.yml"
-user:~/environment/AndroidAppRepo/ $ git push -u origin master
+git add buildspec.yml
+git commit -m "adding buildspec.yml"
+git push -u origin master
 
 ```
 
@@ -302,7 +302,7 @@ aws codebuild start-build --project-name android-app-project
 5. In this step, you will view summarized information about the status of your build.
 
 ```console
-user:~/environment/AndroidAppRepo (master) $ aws codebuild batch-get-builds --ids <<ID>>
+aws codebuild batch-get-builds --ids <<ID>>
 ```
 
 **_Note:_** Replace <<ID>> with the id value that appeared in the output of the previous step.
