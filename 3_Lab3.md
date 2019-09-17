@@ -9,13 +9,13 @@
 aws devicefarm create-project --name AndroidAppTest --region us-west-2
 ```
 3. Make note of the project ARN and the project ID (after "_project:_") returned by the command execution
-![create-devicefarm](./img/Lab3-Stage1-Create-DeviceFarm.PNG)
+![create-devicefarm](./img/Lab3-Stage1-Create-DeviceFarm.png)
 4. Get the ARN of curated list of Top Devices available for the pool. A curated device pool is a pool that is created and managed by AWS Device Farm.
 ```console
 aws devicefarm list-device-pools --arn <<YOUR-PROJECT-ARN>> --type CURATED --region us-west-2 | jq -r '.devicePools[]|select(.name=="Top Devices")|.arn'
 ```
 5.  Review the deployment changes by visiting the [Device Farm console](https://us-west-2.console.aws.amazon.com/devicefarm).
-![complete-devicefarm](./img/Lab3-Stage1-Complete-DeviceFarm.PNG)
+![complete-devicefarm](./img/Lab3-Stage1-Complete-DeviceFarm.png)
 
 ***
 
