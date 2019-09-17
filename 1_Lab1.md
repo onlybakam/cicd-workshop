@@ -308,6 +308,7 @@ user:~/environment/AndroidAppRepo (master) $ aws codebuild batch-get-builds --id
 **_Note:_** Replace <<ID>> with the id value that appeared in the output of the previous step.
 
 6. You will also be able to view detailed information about your build in CloudWatch Logs. You can complete this step by visiting the [AWS CodeBuild console](https://console.aws.amazon.com/codebuild/home).
+
 ![buildsuccess](./img/Lab1-CodeBuild-Success.png)
 
 7. In this step, you will verify the **_app-debug.apk_** file that AWS CodeBuild built and then uploaded to the output bucket. You can complete this step by **visiting** the **AWS CodeBuild console** or the **Amazon S3 console**.
