@@ -1,6 +1,8 @@
 
 ## Lab 3 - Using AWS Device Farm as a Test Stage in CodePipeline
 
+![df-pipeline](img/Lab3-Stage0-DFPipeline.png)
+
 ### Stage 1: Create a Device Farm project
 
 1. Go to Cloud9 IDE
