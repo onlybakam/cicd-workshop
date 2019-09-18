@@ -5,15 +5,15 @@
 
 1. Go to Cloud9 IDE
 2. Run the following commands to create a new Device Farm project. Note: Device Farm is only available in the Oregon region (us-west-2). Do not change the region in the commands below
-```console
-aws devicefarm create-project --name AndroidAppTest --region us-west-2
-```
+    ```console
+    aws devicefarm create-project --name AndroidAppTest --region us-west-2
+    ```
 3. Make note of the project ARN and the project ID (after "_project:_") returned by the command execution
 ![create-devicefarm](./img/Lab3-Stage1-Create-DeviceFarm.png)
 4. Get the ARN of curated list of Top Devices available for the pool. A curated device pool is a pool that is created and managed by AWS Device Farm.
-```console
-aws devicefarm list-device-pools --arn <<YOUR-PROJECT-ARN>> --type CURATED --region us-west-2 | jq -r '.devicePools[]|select(.name=="Top Devices")|.arn'
-```
+    ```console
+    aws devicefarm list-device-pools --arn <<YOUR-PROJECT-ARN>> --type CURATED --region us-west-2 | jq -r '.devicePools[]|select(.name=="Top Devices")|.arn'
+    ```
 5.  Review the deployment changes by visiting the [Device Farm console](https://us-west-2.console.aws.amazon.com/devicefarm).
 ![complete-devicefarm](./img/Lab3-Stage1-Complete-DeviceFarm.png)
 
@@ -23,25 +23,23 @@ aws devicefarm list-device-pools --arn <<YOUR-PROJECT-ARN>> --type CURATED --reg
 
 In this step, you will add a new stage to your pipeline, and then add an action — a test with Device Farm.
 
-1. **Edit** the pipeline. Delete the **Deploy** stage.
+1. **Edit** the pipeline.
 2. Choose the option to add a stage after the **Build** stage with the AWS CodeBuild action. Type a name for the stage (for example, **Test**).
+3. Choose **+ Add action group**,
+   - Type a name for your Device Farm action (for example, **DeviceFarmTest**).
+   - For **Action Provider**, choose **AWS Device Farm**.
+   - For **Region**, choose **us-west-2**.
+   - For **Input artifacts**, choose **BuildArtifact**.
+   - For **ProjectId**, enter the project ID you captured from Stage 1.
+   - For **DevicePoolArn**, enter the curated device pool ARN you captured from Stage 1.
+   - For **AppType**, enter **Android**
+   - For **App**, enter **app-debug.apk**
+   - For **TestType**, enter **BUILTIN_FUZZ**
+4. Click **Done**. Finally, save changes to pipeline by clicking **Save** button on top
 
-2. Choose **+ Add action group**,
-- Type a name for your Device Farm action (for example, **DeviceFarmTest**).
-- For **Action Provider**, choose **AWS Device Farm**.
-- For **Region**, choose **us-west-2**.
-- For **Input artifacts**, choose **BuildArtifact**.
-- For **ProjectId**, enter the project ID you captured from Stage 1.
-- For **DevicePoolArn**, enter the curated device pool ARN you captured from Stage 1.
-- For **AppType**, enter **Android**
-- For **App**, enter **app-debug.apk**
-- For **TestType**, enter **BUILTIN_FUZZ**
+    Learn more about [working with the Built-in Fuzz Test for Device Farm](https://docs.aws.amazon.com/devicefarm/latest/developerguide/test-types-built-in-fuzz.html)
 
-3. Click **Done**. Finally, save changes to pipeline by clicking **Save** button on top
-
-Learn more about [working with the Built-in Fuzz Test for Device Farm](https://docs.aws.amazon.com/devicefarm/latest/developerguide/test-types-built-in-fuzz.html)
-
-![DeviceFarmAction](./img/Lab3-DeviceFarmAction.png)
+    ![DeviceFarmAction](./img/Lab3-DeviceFarmAction.png)
 
 ***
 

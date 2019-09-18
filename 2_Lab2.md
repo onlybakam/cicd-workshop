@@ -74,7 +74,7 @@ aws sns subscribe --topic-arn <<YOUR-TOPIC-ARN>> \
 
 ***
 
-### Stage 4: Approve or Reject an Approval Action in AWS CodePipeline
+### Stage 3: Approve or Reject an Approval Action in AWS CodePipeline
 
 If you receive a notification that includes a direct link to an approval action, choose the **Approve or reject** link, sign in to the console if necessary, and then continue with step 7 below. Otherwise, use all the following steps.
 
