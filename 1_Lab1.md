@@ -328,7 +328,7 @@ aws codebuild start-build --project-name android-app-project
 aws codebuild batch-get-builds --ids <<ID>>
 ```
 
-**_Note:_** Replace <<ID>> with the id value that appeared in the output of the previous step.
+**_Note:_** Replace `<<ID>>` with the id value that appeared in the output of the previous step.
 
 6. You will also be able to view detailed information about your build in CloudWatch Logs. You can complete this step by visiting the [AWS CodeBuild console](https://console.aws.amazon.com/codebuild/home).
 
