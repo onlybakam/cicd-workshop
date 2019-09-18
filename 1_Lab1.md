@@ -47,7 +47,7 @@ Keep an open scratch pad in Cloud9 or a text editor on your local computer for n
 2. On the Welcome page, choose Get Started Now. (If a **_Dashboard_** page appears instead, choose **_Create repository_**.)
 3. On the **_Create repository_** page, in the **_Repository name_** box, type **_AndroidAppRepo_**.
 4. In the **_Description_** box, type **_My demonstration repository_**.
-5. Choose **_Create repository_** to create an empty AWS CodeCommit repository named **_AndroidAppRepo_**.
+5. Click **_Create_** to create an empty AWS CodeCommit repository named **_AndroidAppRepo_**.
 
 **_Note_** The remaining steps in this tutorial assume you have named your AWS CodeCommit repository **_AndroidAppRepo_**. If you use a name other than **_AndroidAppRepo_**, be sure to use it throughout this tutorial. For more information about creating repositories, including how to create a repository from the terminal or command line, see [Create a Repository](http://docs.aws.amazon.com/codecommit/latest/userguide/how-to-create-repository.html).
 
@@ -91,13 +91,14 @@ wget https://github.com/aws-samples/aws-mobile-android-notes-tutorial/archive/ma
 ```console
 unzip master.zip
 mv -v aws-mobile-android-notes-tutorial-master/* AndroidAppRepo/
+mv -v aws-mobile-android-notes-tutorial-master/.* AndroidAppRepo/
 ```
 
 1. Change the directory to your local repo folder. Run **_git add_** to stage the change:
 
 ```console
 cd AndroidAppRepo
-git add *
+git add .
 ```
 
 4. Run **_git commit_** to commit the change:
@@ -108,7 +109,7 @@ git commit -m "Initial Commit"
 
 **_💡 Tip_** To see details about the commit you just made, run **_git log_**.
 
-5. Run **_git config credential_** to store the credential.
+5. Run **_git config credential_** to store the credential. (**Note:** not needed if you are using the credential helper included in the AWS CLI)
 
 ```console
 git config credential.helper store
@@ -122,11 +123,31 @@ git push -u origin master
 
 Provide your Git HTTPs credential when prompted. Credential helper will store it, hence you won't be asked again for subsequent push.
 
-**_💡 Tip_** After you have pushed files to your AWS CodeCommit repository, you can use the [AWS CodeCommit console](https://console.aws.amazon.com/codecommit/home) to view the contents.
+7. When you use **AWS CodeCommit**, you use git. Create a new branch to track a new feature
 
-![buildsuccess](./img/codecommit-success.png)
+```console
+git checkout -b feature
+```
 
-For more information, see [Browse the Contents of a Repository](http://docs.aws.amazon.com/codecommit/latest/userguide/how-to-browse.html).
+8. Update the `README.md` file, check in your changes, and push.
+
+```console
+git add .
+git commit -m "Initial Commit"
+git push -u origin feature
+```
+
+9. After you have pushed files to your AWS CodeCommit repository, you can use the [AWS CodeCommit console](https://console.aws.amazon.com/codecommit/home) to view the contents.
+
+  ![buildsuccess](./img/codecommit-success.png)
+
+  For more information, see [Browse the Contents of a Repository](http://docs.aws.amazon.com/codecommit/latest/userguide/how-to-browse.html).
+
+10. In the console, click on **Branches** to take a look at your existing branches. Next, click on **Pull requests**, then click **Create pull request**. Compare the master and feature branches.
+
+  ![pull-request](img/Lab1-Stage1-Create-Pull-Request.png)
+
+11. On the next page, enter the details to create a new Pull request. You can then merge the pull request or close the pull request.
 
 ***
 
