@@ -37,26 +37,7 @@ Image below shows successfully executed pipeline.
 
 ***
 
-### Stage 2: Edit a Pipeline (Console)
-
-You can use the AWS CodePipeline console to add, edit, or remove stages in a pipeline, as well as to add, edit, or remove actions in a stage.
-
-We will edit the pipeline to add the stage for production deployment and introduce manual gating for production deployment.
-
-1. On the pipeline details page, choose **Edit**. This opens the editing page for the pipeline.
-2. To add a stage, choose **+ Add stage** after the existing **Deploy** Stage.
-3. Provide a name for the stage as **Production**, and then add an one action to it. Items marked with an asterisk are required.
-4. Then choose **+ Add action group**. In **Edit Action** section: provide name as **ProductionDeployment** and action provider as **Amazon S3**
-5. In **Input artifacts**: select the **BuildArtifact**
-6. Type or choose the name of an existing Amazon S3 bucket that was **created in Lab1**.
-7. Set the **S3 object key** to **codepipeline-build/production.apk**.
-8. Choose **Save**.
-9. Finally, save changes by clicking **Save** button on top.
-
-![pipeline-edit](./img/Lab2-Stage2-Editing2.png)
-***
-
-### Stage 3: Add Manual approval action
+### Stage 2: Add Manual approval action
 
 In AWS CodePipeline, you can add an approval action to a stage in a pipeline at the point where you want the pipeline execution to stop so that someone with the required AWS Identity and Access Management permissions can approve or reject the action.
 
@@ -80,7 +61,7 @@ aws sns subscribe --topic-arn <<YOUR-TOPIC-ARN>> \
 
 ![pipeline-edit](./img/Lab2-Stage3-Confirm-MustDoOrErrorOccurs.png)
 
-4. On the pipeline details page, choose **Edit**. This opens the editing page for the pipeline. Choose **+ Add stage** at the point in the pipeline **between Deploy** and **Production** stage, and type a name **Approval** for the stage.
+4. On the pipeline details page, choose **Edit**. This opens the editing page for the pipeline. Choose **+ Add stage** at the point in the pipeline between **Build** and **Deploy** stage, and type a name **Approval** for the stage.
 5. Choose the **+ Add action group**.
 6. On the **Edit action** page, do the following:
 7. In **Action name**, type a name to identify the action like **EmailApproval**.
@@ -89,7 +70,7 @@ aws sns subscribe --topic-arn <<YOUR-TOPIC-ARN>> \
 10. (Optional) In **Comments**, type any additional information you want to share with the reviewer.
 11. Choose **Save**.
 12. Save changes to pipeline by clicking **Save** button on top.
-13. To test your action, choose **Release change** to process that commit through the pipeline, commit a change to the source specified in the source stage of the pipeline.
+13. To test your action, choose **Release change** to process the latest commit through the pipeline, or commit a change to your source to trigger the pipeline.
 
 ***
 
@@ -113,4 +94,4 @@ Once you approve, the pipeline continues and completes successfully.
 
 This **concludes Lab 2**. In this lab, we successfully created CodePipeline for continuous code build and deployment to S3. We also modified CodePipeline to include manual approval action before deploying code to S3 for production. You can now move to the next Lab,
 
-[Lab 3 - Using DeviceFarm as Test Stage in CodePipeline](3_Lab3.md)
+[Lab 3 - Using DeviceFarm as a Test Stage in CodePipeline](3_Lab3.md)

@@ -1,5 +1,5 @@
 
-## Lab 3 - Using AWS Device Farm as Test Stage in CodePipeline
+## Lab 3 - Using AWS Device Farm as a Test Stage in CodePipeline
 
 ### Stage 1: Create a Device Farm project
 
