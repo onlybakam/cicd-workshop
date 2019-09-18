@@ -164,7 +164,7 @@ aws cloudformation create-stack --stack-name DevopsWorkshop-roles \
 --capabilities CAPABILITY_IAM
 ```
 
-**_Tip_** To learn more about AWS CloudFormation, please refer to [AWS CloudFormation UserGuide.](https://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/Welcome.html)
+**_💡 Tip_** To learn more about AWS CloudFormation, please refer to [AWS CloudFormation UserGuide.](https://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/Welcome.html)
 
 2. Upon completion take a note on the service roles created. Check [describe-stacks](http://docs.aws.amazon.com/cli/latest/reference/cloudformation/describe-stacks.html) to find the output of the stack.
 
@@ -178,7 +178,7 @@ echo $(aws cloudformation describe-stacks --stack-name DevopsWorkshop-roles | jq
 echo $(aws cloudformation describe-stacks --stack-name DevopsWorkshop-roles | jq -r '.Stacks[0].Outputs[]|select(.OutputKey=="S3BucketName")|.OutputValue')
 ```
 
-5. Let us **create CodeBuild** project from **CLI**. To create the build project using AWS CLI, we need JSON-formatted input.
+5. Let us create a **CodeBuild project** from **CLI**. To create the build project using AWS CLI, we need JSON-formatted input.
     **_Create_** a json file named **_'create-project.json'_** under 'MyDevEnvironment'. Copy the content below to create-project.json. (Replace the placeholders marked with **_<<>>_** with  values for BuildRole ARN, S3 Output Bucket and region from the previous step.) 
     
 
@@ -305,9 +305,11 @@ As a sample shown below:
 
 2. Commit & push the build specification file to repository
 ```console
+git checkout master
+git pull
 git add buildspec.yml
 git commit -m "adding buildspec.yml"
-git push -u origin master
+git push
 
 ```
 
