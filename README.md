@@ -16,17 +16,17 @@ In few hours, quickly learn how to effectively leverage various AWS services to 
 
 * **IAM Permissions:** Finally, for the AWS account ensure you have sufficient privileges. You must have permissions for the following services:
 
-- AWS Identity and Access Management
-- Amazon Simple Storage Service
-- AWS CodeCommit
-- AWS CodeBuild
-- AWS CodePipeline
-- AWS CloudFormation
-- AWS Cloud9
-- Amazon EC2
-- Amazon SNS
-- Amazon CloudWatch Events
-- AWS Device Farm
+  - AWS Identity and Access Management
+  - Amazon Simple Storage Service
+  - AWS CodeCommit
+  - AWS CodeBuild
+  - AWS CodePipeline
+  - AWS CloudFormation
+  - AWS Cloud9
+  - Amazon EC2
+  - Amazon SNS
+  - Amazon CloudWatch Events
+  - AWS Device Farm
 
 ***
 
