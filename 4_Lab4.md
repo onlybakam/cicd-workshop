@@ -19,6 +19,7 @@ In this lab, you will interact directly with AWS Device Farm and run some instru
 ### Stage 2: Create a new run
 
 1. Download the pre-built Android application [app-debug.apk](https://github.com/aws-samples/aws-device-farm-sample-app-for-android/raw/master/prebuilt/app-debug.apk) and the pre-built test suite [app-debug-androidTest.apk](https://github.com/aws-samples/aws-device-farm-sample-app-for-android/raw/master/prebuilt/app-debug-androidTest.apk)
+    **_Note:_** Visit the [repo](https://github.com/aws-samples/aws-device-farm-sample-app-for-android#strategies-for-espresso) for more information about the Espresso tests
 2. Click **+ Create a new run**
 3. Under **Choose your application**, make sure you have selected the option to test native applications and upload the file **app-debug.apk**
     ![native](img/Lab4-Stage2-native.png)
@@ -27,7 +28,7 @@ In this lab, you will interact directly with AWS Device Farm and run some instru
 6. In **Select devices**, select the device pool that you just created in Stage 1. Click **Next Step**
 7. In **Specify device state**, review the information and click **Next step**
 8. In **Review and start run**, review the information. Change the **Execution timeout** to limit the execution duration of your test. Click **Confirm and start run**.
-9. You run is now scheduled and gets started momentarily.
+9.  You run is now scheduled and gets started momentarily.
 
 ### Stage 3: Remote Access
 
