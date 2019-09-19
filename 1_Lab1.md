@@ -17,26 +17,27 @@ Take a moment now and setup your Cloud9 development environment.
 7. Review the environment settings and click **Create environment**. It will take several minutes for your environment to be provisioned and prepared.
 8. Once ready, your IDE will open to a welcome screen. Below that, you should see a terminal prompt similar to: ![setup](./img/setup-cloud9-terminal.png) You can run AWS CLI commands in here just like you would on your local computer. Verify that your user is logged in by running the following command.
 
-```console
-aws sts get-caller-identity
-```
+    ```console
+    aws sts get-caller-identity
+    ```
 
-You'll see output indicating your account and user information:
-```console
-{
-    "Account": "123456789012",
-    "UserId": "AKIAI44QH8DHBEXAMPLE",
-    "Arn": "arn:aws:iam::123456789012:user/user"
-}
-```
+    You'll see output indicating your account and user information:
 
-Keep your AWS Cloud9 IDE opened in a tab throughout this workshop as we'll use it for activities like cloning, pushing changes to repository and using the AWS CLI.
+    ```console
+    {
+        "Account": "123456789012",
+        "UserId": "AKIAI44QH8DHBEXAMPLE",
+        "Arn": "arn:aws:iam::123456789012:user/user"
+    }
+    ```
+
+    Keep your AWS Cloud9 IDE opened in a tab throughout this workshop as we'll use it for activities like cloning, pushing changes to repository and using the AWS CLI.
 
 ### 💡 Tips
 
 Keep an open scratch pad in Cloud9 or a text editor on your local computer for notes. When the step-by-step directions tell you to note something such as an ID or Amazon Resource Name (ARN), copy and paste that into the scratch pad.
 
----
+***
 
 ### Stage 1: Create an AWS CodeCommit Repository
 
