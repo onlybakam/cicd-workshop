@@ -59,7 +59,7 @@ If the action is approved, the pipeline execution resumes. If the action is reje
 
 3. An Email would be sent for **confirmation** on the subscription. **Acknowledge** the subscription to receive mails from topic.
 
-  ![pipeline-edit](./img/Lab2-Stage3-Confirm-MustDoOrErrorOccurs.png)
+    ![pipeline-edit](./img/Lab2-Stage3-Confirm-MustDoOrErrorOccurs.png)
 
 4. On the pipeline details page, choose **Edit**. This opens the editing page for the pipeline. Choose **+ Add stage** at the point in the pipeline between **Build** and **Deploy** stage, and type a name **Approval** for the stage.
 5. Choose the **+ Add action group**.
