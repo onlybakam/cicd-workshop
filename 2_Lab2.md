@@ -49,7 +49,7 @@ If the action is approved, the pipeline execution resumes. If the action is reje
     aws sns create-topic --name AndroidApp-Approval-Topic --region <YOUR-REGION>
     ```
 
-2. **Subscribe** to the topic using your email id. **Replace** the **ARN** and **email address** placeholders accordingly.
+2. **Subscribe** to the topic using your email address. **Replace** the **ARN** and **email address** placeholders accordingly.
 
     ```console
     aws sns subscribe --topic-arn <<YOUR-TOPIC-ARN>> \
