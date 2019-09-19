@@ -1,13 +1,6 @@
 
 ## Lab 4 - Hands-on with Device Farm
 
-WIP
-- use existing DF project
-- create a device pool
-- upload new APK (console or CLI)
-- create a new run
-  - upload a new espresso test
-
 In this lab, you will interact directly with AWS Device Farm and run some instrumentation tests. 
 
 ### Stage 1: Create a device pool
@@ -15,7 +8,7 @@ In this lab, you will interact directly with AWS Device Farm and run some instru
 1. Navigate to the [AWS Device Farm Console](https://us-west-2.console.aws.amazon.com/devicefarm/home).
 2. Choose the project you created **Lab 3** and click **Project settings** in the upper right corner.
     ![project-setting](img/Lab4-Stage1-project-settings.png)
-3.Choose the **Device pools** tab and and click **Create a new device pool**. create a new dynamic pool that adapt as new devices become available.
+3. Choose the **Device pools** tab and and click **Create a new device pool**. create a new dynamic pool that adapt as new devices become available.
   - For **Name**, enter a name like "Dynamic Pool"
   - Add rules as shown below
     ![device-pool-rules](img/Lab4-Stage1-rules.png)
